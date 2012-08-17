@@ -14,5 +14,5 @@ public:
 	cv::Size patternSize;
 	
 	ofImage camImage, proImage;
-	vector<Point2f> camCenters, proCenters;
+	vector<cv::Point2f> camCenters, proCenters;
 };

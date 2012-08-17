@@ -1,6 +1,6 @@
 #include "testApp.h"
-
-void drawChessboardCorners(cv::Size patternSize, const vector<Point2f>& centers) {
+/*
+void drawChessboardCorners(cv::Size patternSize, const vector<cv::Point2f>& centers) {
 	ofMesh lines;
 	ofMesh crosses;
 	lines.setMode(OF_PRIMITIVE_LINE_STRIP);
@@ -15,7 +15,7 @@ void drawChessboardCorners(cv::Size patternSize, const vector<Point2f>& centers)
 			if(i == centers.size()) {
 				return;
 			}
-			ofVec2f cur = toOf(centers[i++]);
+			ofVec2f cur = ofxCv::toOf(centers[i++]);
 			ofCircle(cur, radius);
 			crosses.addVertex(cur - firstCross);
 			crosses.addVertex(cur + firstCross);
@@ -27,11 +27,11 @@ void drawChessboardCorners(cv::Size patternSize, const vector<Point2f>& centers)
 	lines.draw();
 	crosses.draw();
 }
-
+*/
 vector<cv::Point2f> getCenters(ofImage& img, cv::Size patternSize) {
-	Mat imgMat = toCv(img);
+	cv::Mat imgMat = ofxCv::toCv(img);
 	vector<cv::Point2f> centers;
-	bool found = findCirclesGrid(imgMat, patternSize, centers, CALIB_CB_CLUSTERING | CALIB_CB_ASYMMETRIC_GRID);
+	bool found = findCirclesGrid(imgMat, patternSize, centers, cv::CALIB_CB_CLUSTERING | cv::CALIB_CB_ASYMMETRIC_GRID);
 	if(!found) {
 		cout << "failed to find circles" << endl;
 	}
@@ -49,8 +49,8 @@ void testApp::decodeAndSave(string filename) {
 	
 	patternSize = cv::Size(4, 11);
 	
-	getProCamImages(filename + "/", proImage, camImage, 1024/2, 768/2);
-	
+	getProCamImages(filename + "/", proImage, camImage, 1024/2, 768/2, GRAYCODE_MODE_OPPOSITES);
+	cout << "save to " << "results/" + filename + "-camImage.png" << endl;
 	camImage.saveImage("results/" + filename + "-camImage.png");
 	camImage.update();
 	

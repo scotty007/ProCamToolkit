@@ -1,0 +1,6 @@
+ofxAssimpModelLoader
+ofxXmlSettings
+ofxOpenCv
+ofxCv
+ofxControlPanel
+

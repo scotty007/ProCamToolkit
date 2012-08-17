@@ -1,0 +1,4 @@
+ofxThread
+ofxDirList
+ofxOpenCv
+ofxCv
